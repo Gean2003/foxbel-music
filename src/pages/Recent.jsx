@@ -6,22 +6,10 @@ import Header from '../header/Header'
 import useMusic from '../hooks/useMusic'
 import  endpoint from '../utils/APIRoutes'
 
-const Recent = () => {
+const Recent = ({data, src, setSrc, audioElement}) => {
 
-  const [data, setData] = useState()
   const [isLoading, setisLoading] = useState(true)
   const [isOpen, setisOpen] = useState(false)
-  const [music, setMusic] = useState('discovery')
-  const [src, setSrc] = useState('')
-
-  const audioElement = useRef()
-
-  useEffect(() => {
-    
-      axios.get(`${endpoint.DEEZER_API_SEARCH} ${music}`)
-              .then(res =>  {setData(res.data.data)} )   
-               .catch(err => console.log(err) )
-  }, [music])
 
   return (
     <div  className='mx-auto max-w-[1920px] lg:w-full lg:h-screen lg:pb-[100px] lg:overflow-auto'>
@@ -30,9 +18,6 @@ const Recent = () => {
 
     <div className='w-full h-auto flex-wrap'>
       <div className='w-full h-auto flex gap-7 flex-wrap  justify-center '>
-        {
-            src? <audio src={ src } ref={audioElement} /> : <audio  src={ data?[0].preview : '' } ref={audioElement} />
-        }
       {
         data?.map( info => (
             <RecentList key={info.id}

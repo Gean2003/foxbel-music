@@ -19,6 +19,7 @@ function App() {
                .catch(err => console.log(err) )
   }, [music])
 
+  //BUG: El audio debe ser global, error cuando vuelves a la pantalla de recent 
   
   return (
     <div className='h-screen max-w-[1920px] mx-auto'>
